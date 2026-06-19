@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Translator — 桌面截图翻译工具</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+            background: #f8f9fa; color: #333; line-height: 1.7;
+        }
+        .hero {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%);
+            color: #fff; text-align: center; padding: 80px 24px 60px;
+        }
+        .hero h1 { font-size: 2.8em; font-weight: 800; margin-bottom: 8px; }
+        .hero p { font-size: 1.2em; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .hero .badge { display: inline-block; margin-top: 18px; padding: 6px 16px;
+            background: rgba(255,255,255,0.18); border-radius: 20px; font-size: 0.9em; }
+        .container { max-width: 960px; margin: 0 auto; padding: 40px 24px; }
+        .section { margin-bottom: 48px; }
+        .section h2 { font-size: 1.6em; margin-bottom: 16px; color: #1a73e8; border-bottom: 2px solid #e8eaed; padding-bottom: 8px; }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+        .feature { background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .feature h3 { font-size: 1.1em; margin-bottom: 6px; }
+        .feature p { color: #666; font-size: 0.95em; }
+        .feature .icon { font-size: 1.6em; margin-bottom: 8px; }
+        .download-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); text-align: center; }
+        .card h3 { font-size: 1.2em; margin-bottom: 6px; }
+        .card .subtitle { color: #888; font-size: 0.9em; margin-bottom: 16px; }
+        .card .btn {
+            display: inline-block; padding: 10px 28px; border-radius: 8px;
+            font-size: 1em; font-weight: 600; text-decoration: none; cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .card .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .btn-primary { background: #1a73e8; color: #fff; }
+        .btn-outline { background: #fff; color: #1a73e8; border: 2px solid #1a73e8; }
+        .btn-secondary { background: #5f6368; color: #fff; }
+        pre { background: #1e1e1e; color: #d4d4d4; border-radius: 8px; padding: 16px 20px; overflow-x: auto; font-size: 0.9em; }
+        code { font-family: "Cascadia Code", "Fira Code", "Consolas", monospace; }
+        .steps { list-style: none; counter-reset: step; }
+        .steps li { counter-increment: step; margin-bottom: 12px; padding-left: 36px; position: relative; }
+        .steps li::before {
+            content: counter(step); position: absolute; left: 0; top: 0;
+            width: 24px; height: 24px; background: #1a73e8; color: #fff;
+            border-radius: 50%; text-align: center; font-size: 0.8em; line-height: 24px; font-weight: 700;
+        }
+        .version-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .version-table th, .version-table td { padding: 12px 16px; text-align: left; }
+        .version-table th { background: #f1f3f4; font-weight: 600; }
+        .version-table td { border-top: 1px solid #e8eaed; }
+        .footer { text-align: center; color: #999; font-size: 0.85em; padding: 32px 0; }
+        .footer a { color: #1a73e8; text-decoration: none; }
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.8em; }
+            .hero { padding: 60px 16px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="hero">
+    <h1>🔍 Desktop Translator</h1>
+    <p>快捷键框选屏幕任意区域 → OCR 识别 → 自动翻译 → 浮窗显示</p>
+    <div class="badge">Windows · Python 3.10+ · Apache 2.0</div>
+</header>
+
+<div class="container">
+
+    <div class="section">
+        <h2>快速开始</h2>
+        <ol class="steps">
+            <li>安装 <a href="https://www.python.org/downloads/">Python 3.10+</a></li>
+            <li>安装 <a href="https://github.com/UB-Mannheim/tesseract/wiki">Tesseract OCR</a>（勾选 English 语言包）</li>
+            <li><code>pip install -r requirements.txt</code></li>
+            <li><code>python desktop_translator_cn.py</code></li>
+            <li>按 <strong>Ctrl + Shift + S</strong> 框选翻译</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>版本选择</h2>
+        <table class="version-table">
+            <tr><th>文件</th><th>翻译源</th><th>适用场景</th></tr>
+            <tr>
+                <td><code>desktop_translator.py</code></td>
+                <td>Google 翻译</td>
+                <td>海外 / 已开代理</td>
+            </tr>
+            <tr>
+                <td><code>desktop_translator_cn.py</code></td>
+                <td>百度 → 有道 → 必应</td>
+                <td>🏠 国内直连，无需代理</td>
+            </tr>
+        </table>
+        <p style="margin-top:12px;color:#666;font-size:0.9em;">两个版本除翻译源外完全相同，任选其一即可。</p>
+    </div>
+
+    <div class="section">
+        <h2>功能特性</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="icon">🔬</div>
+                <h3>极小文字识别</h3>
+                <p>40×14px 级别按钮文字可正确识别，自适应 10 倍超采样</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🎬</div>
+                <h3>视频字幕</h3>
+                <p>自动尝试正反双向 OCR，白字黑底/黑字白底均能识别</p>
+            </div>
+            <div class="feature">
+                <div class="icon">✅</div>
+                <h3>智能拼写纠正</h3>
+                <p>置信度感知 — 高置信度词信任 OCR 原文，不误改正确结果</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🖱️</div>
+                <h3>浮窗可拖动</h3>
+                <p>翻译结果浮窗点击任意位置即可拖到想要的位置</p>
+            </div>
+            <div class="feature">
+                <div class="icon">📌</div>
+                <h3>图钉固定</h3>
+                <p>点击 📌 固定浮窗不自动消失，方便反复查看</p>
+            </div>
+            <div class="feature">
+                <div class="icon">⚙️</div>
+                <h3>自定义快捷键</h3>
+                <p>设置界面可录制任意组合键作为触发快捷键</p>
+            </div>
+            <div class="feature">
+                <div class="icon">💾</div>
+                <h3>翻译缓存</h3>
+                <p>重复文本即时返回，节省流量和时间</p>
+            </div>
+            <div class="feature">
+                <div class="icon">📦</div>
+                <h3>可打包为 exe</h3>
+                <p>PyInstaller 一键打包为独立 exe，无需 Python 环境</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>下载</h2>
+        <div class="download-cards">
+            <div class="card">
+                <h3>📥 国内版</h3>
+                <div class="subtitle">百度翻译 · 国内直连</div>
+                <a class="btn btn-primary" href="https://github.com/l2026/desktop-translator/releases/latest">下载 exe 包</a>
+            </div>
+            <div class="card">
+                <h3>🌐 海外版</h3>
+                <div class="subtitle">Google 翻译 · 海外用户</div>
+                <a class="btn btn-outline" href="https://github.com/l2026/desktop-translator/releases/latest">下载 exe 包</a>
+            </div>
+            <div class="card">
+                <h3>💻 源码</h3>
+                <div class="subtitle">Python 开发者</div>
+                <a class="btn btn-secondary" href="https://github.com/l2026/desktop-translator">GitHub 仓库</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>命令行安装</h2>
+        <pre><code># 克隆仓库
+git clone https://github.com/l2026/desktop-translator.git
+cd desktop-translator
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 运行国内版 (推荐)
+python desktop_translator_cn.py
+
+# 运行海外版
+python desktop_translator.py
+
+# 自测
+python desktop_translator.py --test</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>打包为 exe</h2>
+        <pre><code>pip install pyinstaller
+
+# 国内版
+pyinstaller --noconsole --onefile --collect-all spellchecker desktop_translator_cn.py
+
+# 海外版
+pyinstaller --noconsole --onefile --collect-all spellchecker desktop_translator.py
+
+# 生成的 exe 在 dist/ 目录
+# 需要将 Tesseract 安装目录下的 tesseract.exe 和 tessdata/ 复制到 exe 同级</code></pre>
+    </div>
+
+    <div class="section">
+        <h2>快捷键</h2>
+        <table class="version-table">
+            <tr><th>操作</th><th>快捷键</th></tr>
+            <tr><td>框选截图翻译</td><td><strong>Ctrl + Shift + S</strong>（可自定义）</td></tr>
+            <tr><td>取消框选</td><td>Esc</td></tr>
+            <tr><td>关闭结果浮窗</td><td>点击 ✕ 按钮</td></tr>
+            <tr><td>固定浮窗</td><td>点击 📌 按钮</td></tr>
+            <tr><td>拖动浮窗</td><td>点击浮窗任意位置拖拽</td></tr>
+        </table>
+    </div>
+
+</div>
+
+<footer class="footer">
+    <p>
+        <a href="https://github.com/l2026/desktop-translator">GitHub</a> ·
+        <a href="https://github.com/l2026/desktop-translator/blob/main/LICENSE">Apache 2.0</a>
+    </p>
+    <p>Desktop Translator · 截图翻译桌面工具</p>
+</footer>
+
+</body>
+</html>

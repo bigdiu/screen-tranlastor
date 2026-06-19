@@ -1,0 +1,35 @@
+# Virtual environment
+venv/
+env/
+.venv/
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Release binaries (too large for git)
+release/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug
+*_ocr_debug/
+*.log
+
+# Extraneous / auto-generated
+AGENTS.md
+DesktopTranslator_v1.zip
+docs/error-log.md
+images/
